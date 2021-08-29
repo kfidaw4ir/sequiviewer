@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="theme-color" content="#555555" />
+    <link rel="stylesheet" type="text/css" href="css/global.css" />
+    <link rel="stylesheet" type="text/css" href="css/chapterlist.css" />
+    <script src="js/global.js" defer></script>
+    <script src="js/chapterlist.js" defer></script>
+    <script src="js/chapterlist-reader.js" defer></script>
+    <title>Reader</title>
+</head>
+<body>
+    <img src="img/blank.png" id="bookinfo-img-bg" />
+    <div id="header" class="notmain"></div>
+    <div id="hiddenbadge" style="display:none;">Hidden</div>
+
+    <div id="main">
+        <div id="loadingdisp" class="screencenter"></div>
+        <div id="bookinfo" style="display:none;">
+            <div id="bookinfo-top">
+                <img src="img/blank.png" id="bookinfo-img" />
+                <div id="bookinfo-statistics">
+                    <div id="bookinfo-title"></div>
+                    <div id="bookinfo-author">Unknown Author</div>
+                    <div id="bookinfo-chapters">0 chapters available</div>
+                </div>
+            </div>
+            <div id="bookinfo-description" tabindex="-1">No Description...</div>
+        </div>
+
+        <div id="bookchapters" style="display:none;"></div>
+    </div>
+    <div id="navbar" class="notmain">
+        <span id="navbar-center"></span><span id="navbar-left"></span><span id="navbar-right"></span>
+    </div>
+</body>
+</html>

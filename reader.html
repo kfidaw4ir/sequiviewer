@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="theme-color" content="#555555" />
+    <link rel="stylesheet" type="text/css" href="css/global.css" />
+    <link rel="stylesheet" type="text/css" href="css/reader.css" />
+
+    <!-- libraries loaded first :( -->
+    <script src="js/lib/jszip.min.js"></script>
+
+    <script src="js/global.js" defer></script>
+    <script src="js/reader-defaults.js" defer></script>
+    <script src="js/reader.js" defer></script>
+    <script src="js/reader-reader.js" defer></script>
+    <script src="js/reader-jtd.js" defer></script>
+    <title>Reader</title>
+</head>
+<body>
+    <div id="header" class="notmain">Title</div>
+    <div id="hide" class="hidden"><div>The page has been hidden.<br>Press OK to continue.</div></div>
+    <div id="pageend">End of chapter</div>
+    <div id="pagecont">
+        <img src="img/blank.png" id="page" />
+    </div>
+    <div id="main">
+        <div id="loading-bar" style="width: 0;" class="hidden osd toposd"></div>
+        <div id="progress" class="osd toposd">Initializing...</div>
+        <div id="toprightosd" class="osd toposd"></div>
+        <div id="pososd" class="osd btmosd">
+            <div id="pososd-in"></div>
+            <img src="img/x.png" id="pososd-x"></img>
+        </div>
+        <div id="zoomosd" class="osd btmosd">100%</div>
+        <div id="jumpto-dialog" class="hidden overlaymessagebox screencenterbox">
+            Jump to page...
+            <div>
+                <input type="tel" id="jumpto-dialog-input" />
+            </div>
+        </div>
+    </div>
+        <div id="navbar" class="notmain">
+        <span id="navbar-center"></span><span id="navbar-left">Fullscreen</span><span id="navbar-right">Jump</span>
+    </div>
+</body>
+</html>

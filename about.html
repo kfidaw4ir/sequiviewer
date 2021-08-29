@@ -1,0 +1,68 @@
+<title>about sequiviewer</title>
+<meta charset="utf-8" />
+<h1>sequiviewer</h1>
+ver 2021-07-28 13:30 by ale4710
+<br>https://alego.web.fc2.com/kaiosapps/sequiviewer/
+<br>alego4710@vivaldi.net
+
+<h2>credits</h2>
+<ul>
+    <li><a href="http://stuartk.com/jszip" target="_blank">JSZip</a> v3.5.0 by Stuart Knightley, licenced under MIT Licence.</li>
+    <li><a href="https://www.pixiv.net/en/artworks/58306343" target="_blank">青</a> by K.Hati, use allowed with credit for non-commercial purposes.</li>
+</ul>
+
+<h2>useful misc. info</h2>
+<ul>
+    <li>bookmarks are dependent on the folder name.</li>
+    <li>(more will be added later)</li>
+</ul>
+
+<h2>example metadata.json files</h2>
+basic example:
+<pre>
+{
+    "name": "Book 1",
+    "sortname": "book 1",
+    "author": "Author 1",
+    "description": "This is an example book by author Author 1, who has sold over 1,000,000 copies of..."
+}
+</pre>
+examples for sortname:
+<br>sortname is used for sorting the list. if sortname is not defined it will put the first letter as 「ひ」 instead of "h", and then it will be at the bottom of the list.
+<pre>
+{
+    "name": "ひだまりスケッチ",
+    "sortname": "hidamari sketch",
+    "author": "蒼樹うめ",
+    "description": "(description)"
+}
+</pre>
+<br>if all your stuff is in japanese you can make sortname as hiragana. there is no other reason to this other than, ① having the japanese character show up in the popup, and/or ② separating japanese and roman characters on purpose.
+<pre>
+{
+    "name": "ひだまりスケッチ",
+    "sortname": "ひだまりすけっち",
+    "author": "蒼樹うめ",
+    "description": "(description)"
+}
+</pre>
+<h2>example folder layout</h2>
+<pre>
+.sequiviewer
+├ book 1
+│├ metadata.json
+│├ cover.jpg
+│├ 1
+││├ 1.png
+││├ 2.png
+││└ 3.png
+│├ 2
+││├ 1.png
+││├ 2.png
+││└ 3.png
+├ book 2
+│├ metadata.json
+│├ cover.jpg
+│├ 1.cbz
+│├ 2.cbz
+</pre>

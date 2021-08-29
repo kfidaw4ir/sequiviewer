@@ -1,0 +1,122 @@
+body {
+    margin: 0;
+    padding: 0;
+    color: #fff;
+    background: #000;
+    overflow: hidden;
+    font-family: 'open sans';
+}
+:focus {
+    outline: none;
+}
+#header, #navbar {
+    height: 20px;
+    text-align: center;
+}
+#header {padding: 2px 5px 8px}
+#navbar {padding: 5px;}
+
+.notmain {
+    background: #555;
+}
+
+#main {
+    height: calc(100vh - 70px); /* take off 60px and 10 more for margin on top and bottom */
+    padding: 5px 0;
+    position: relative;
+}
+/*header specific*/
+#header {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+/*navbar specific*/
+#navbar {
+    text-transform: capitalize;
+    display: block;
+    position: relative;
+}
+#navbar * {
+    display: inline-block;
+    position: absolute;
+}
+#navbar-left, #navbar-right {
+    font-size: 14px;
+    top: 6.5px;
+}
+#navbar-left {
+    left: 5px;
+}
+#navbar-right {
+    right: 5px;
+}
+#navbar-center {
+    left: 50%;
+    transform: translateX(-50%);
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.screencenter, .screencenterbox { /* shared rules here */
+    position: absolute;
+    top: 50%;
+}
+.screencenter {
+    left: 0;
+    width: 100vw;
+    transform: translateY(-50%);
+    text-align: center;
+}
+.screencenterbox {
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.overlaymessagebox {
+    border: 1px solid #fff;
+    background: #000;
+    padding: 5px;
+    text-align: center;
+}
+
+.listbadgecont {
+    position: absolute;
+    right: 5px;
+    /* top: 0; */
+    top: 50%;
+    transform: translatey(-50%);
+    width: 60%;
+    text-align: right;
+}
+.listbadge {
+    font-size: 12px;
+    border-radius: 3px;
+    padding: 0 2px;
+    margin-left: 4px;
+    position: relative;
+    top: -1px;
+}
+.hidden {
+    display: none;
+}
+
+#toastmsg {
+    position: absolute;
+    top: 0;
+    width: calc(100vw - 22px);
+    padding: 6px;
+    background: #000;
+    color: #fff;
+    margin: 5px;
+    border-radius: 3px;
+    transition: transform 0.5s, opacity 0.5s;
+
+    z-index: 10000;
+
+    animation: toastmsginit 0.5s;
+}
+
+@keyframes toastmsginit {
+    from {transform: translatey(-100%); opacity: 0;}
+    to   {transform: none; opacity: 1;}
+}

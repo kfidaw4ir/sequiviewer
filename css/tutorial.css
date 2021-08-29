@@ -1,0 +1,38 @@
+#main {
+    text-align: center;
+}
+p {
+    margin: 5px;
+}
+.title {
+    font-size: 24px;
+}
+
+.horizonal-directional {
+    vertical-align: middle;
+}
+
+.tutorial-anim {
+    width: 180px;
+    height: auto;
+}
+
+/* zoom tutorial */
+/* #zoom-btn {
+    width: 40px;
+    height: 40px;
+}
+#zoom-ilu {
+    height: auto;
+    width: 100px;
+} */
+
+/* corner tutorial */
+#corner-pad {
+    width: 100px;
+    height: auto;
+}
+/* #corner-ex {
+    width: 180px;
+    height: auto;
+} */

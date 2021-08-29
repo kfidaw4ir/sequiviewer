@@ -1,0 +1,142 @@
+/* on default, not focused! */
+.libraryitem { 
+    height: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    display: block;
+    position: relative;
+}
+.libraryitem .cover, .libraryitem .description {
+    display: none;
+}
+.libraryitem .hiddenbadge {
+    position: absolute;
+    display: block;
+    right: 2px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #f00;
+    /* background: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(255,0,0,1) 100%); */
+    border-radius: 3px;
+    font-size: 12px;
+    padding: 0 2px;
+
+}
+.libraryitem .icon {
+    height: auto;
+    width: 20px;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.libraryitem .title {
+    position: relative;
+    top: -1px;
+}
+
+/* on focus! */
+.libraryitem:focus {
+    height: 90px;
+    background: #555;
+    white-space: normal;
+}
+.libraryitem:focus .cover {
+    display: inline;
+}
+.libraryitem:focus .hiddenbadge {
+    bottom: 2px;
+    top: unset;
+    font-size: 14px;
+    transform: none;
+    /* background: #f00; */
+    /*background: rgba(255,0,0,0.6);*/
+    /* border-radius: 2px 0 0 0; */
+}
+.libraryitem:focus .description {
+    display: inline-block;
+    width: calc(100vw - 65px);
+    font-size: 12px;
+    position: relative;
+    top: -3px;
+}
+.libraryitem:focus .icon {
+    display: none;
+}
+.libraryitem:focus .title {
+    /*font-size: 18px;*/
+    /* font-style: italic; */
+    /* position: relative; */
+    top: 0;
+    line-height: 0;
+    /* margin-top: 10px; */
+}
+
+/*no specific.*/
+.cover {
+    height: 90px;
+    width: 60px;
+}
+.libraryitem img {
+    float: left;
+    padding-right: 4px;
+}
+
+#hiddentitlebadge {
+    background: #f00;
+    position: absolute; 
+    right: 100%;
+    border-radius: 2px;
+    margin: 0 5px;
+    padding: 0 2px;
+}
+
+/*
+
+.description {
+    float: left;
+}
+.title {
+    float: left;
+}
+
+*/
+
+#main {
+    overflow-y: scroll;
+}
+
+#blankscrnmsg {
+    position: absolute;
+    left: 0;
+    width: 100vw;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: center;
+}
+
+
+#header-acttitle {
+    position: relative;
+    top: -6px;
+    left: -24px;
+}
+#header-subtitle {
+    position: absolute;
+    font-size: 11px;
+    /* top: -9px; */
+    /* left: 26px; */
+    top: 15px;
+    left: 84px;
+}
+.header-subtitle-tr {
+    opacity: 0.5;
+}
+
+#lettercont {
+    transition: opacity 0.2s;
+    width: 50px;
+    height: 50px;
+    font-size: 32px;
+    border: 1px solid #fff;
+    background: rgba(0,0,0,0.75);
+}

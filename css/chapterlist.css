@@ -1,0 +1,111 @@
+html, body {
+    margin: 0; 
+    height: 100%; 
+    overflow: hidden;
+}
+#bookinfo {
+    font-size: 12px;
+}
+#bookinfo-title {
+    font-size: 16px;
+    max-height: 44px;
+    overflow: hidden;
+}
+#hiddenbadge {
+    position: absolute;
+    display: block;
+    /* left: 38px; */
+    /* bottom: 0; */
+    font-size: 14px;
+    padding: 0 2px;
+    background: rgba(255,0,0,0.25);
+    height: 19px;
+    top: 11px;
+    right: 0px;
+
+    border-radius: 2px 0 0 0; 
+    /* border-radius: 0 0 2px 0; */
+
+}
+#bookinfo-top {
+    height: 90px;
+    position: relative;
+}
+#bookinfo-img {
+    height: 90px;
+    width: 60px;
+    float: left;
+    padding: 0 5px;
+}
+#bookinfo-description {
+    /*
+    display: inline-block;
+    width: calc(100vw - 65px);
+    max-height: 72px;
+    */
+    position: absolute;
+    height: calc(100vh - 160px);
+    width: calc(100vw - 10px);
+    bottom: 0px;
+    display: block;
+    padding: 0 5px 5px;
+    overflow: scroll;
+    white-space: pre-line;
+
+    background: #000;
+    background: rgba(0,0,0,0.5);
+    background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.75) 100%); 
+    
+}
+#bookinfo-statistics {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: calc(100vw - 70px);
+}
+#bookinfo-img-bg {
+    position: absolute;
+    width: 100vw;
+    height: auto;
+    /*
+    height: calc(100vh - 60px);
+    width: auto;
+    */
+    top: 50%;
+    transform: translateY(-50%);
+    /* filter: blur(15px); */
+    z-index: -100;
+    opacity: 0.1;
+}
+
+
+/*chapters*/
+.chapteritem {
+    padding: 0 5px;
+    position: relative;
+}
+.chapteritem:focus {
+    background: #555;
+    background: rgba(150,150,150,0.4);
+    /* background: linear-gradient(270deg, rgba(0,0,0,0) 0%, rgba(150,150,150,1) 100%); */
+}
+#bookchapters {
+    height: calc(100vh - 60px);
+    overflow: scroll;
+    position: relative;
+    top: -5px;
+    /* font-size: small; */
+}
+#chapter-lastread {
+    background: #ff0;
+    color: #000;
+
+}
+.lastread:focus {
+    /* background: linear-gradient(270deg, rgba(0,0,0,0) 0%, rgba(200,200,0,0.9) 100%); */
+    background: rgba(200,200,0,0.5);
+}
+.lastread {
+    /* background: linear-gradient(270deg, rgba(0,0,0,0) 0%, rgba(200,200,0,0.4) 100%); */
+    background:  rgba(200,200,0,0.2);
+}
