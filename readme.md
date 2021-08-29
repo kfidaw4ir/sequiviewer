@@ -13,7 +13,7 @@ bh store: https://store.bananahackers.net/#sequiviewer
 ## library structure
 for detailed instructions click the following link: https://alego.web.fc2.com/kaiosapps/sequiviewer/setup/
 
-but basically the format should be like this:
+the most basic format is this.
 
     .sequiviewer/book_title/chapter_number/page_number.jpg
 
