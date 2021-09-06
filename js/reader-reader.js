@@ -20,7 +20,7 @@ updatePososdTO = setTimeout(updatePososdTOact,2500), //set the initial timeout t
 osdautohide = false,
 directionalsHeld = [],
 pageTurnDisabled = true,
-jszip = new JSZip(), //jszip: only used for reading :( 
+jszip = null,
 
 errorMessages = {
     archiveNoFiles: 'Zip extractor found no files.<ul style="text-align:left;"><li>Is your archive empty?</li><li>Is your archive in CBZ/ZIP format? (RAR, 7Z not supported)</li></ul>',
@@ -28,13 +28,19 @@ errorMessages = {
 }
 ;
 
-header.innerHTML = '#' + parseFloat(hashproced.chapter) + ' - ' + hashproced.name; //Note!!!!!!! hashproced.chapter might not be a valid number!!
+header.textContent = '#' + parseFloat(hashproced.chapter) + ' - ' + hashproced.name; //Note!!!!!!! hashproced.chapter might not be a valid number!!
 
 //load event listener has been moved to the bottom.
 
-function showerror(msg) {
+function showerrorraw(msg) {
     hider.innerHTML = '<div><b>An Error Occured!</b><p>' + msg + '</div>';
     //hider.style.display = null;
+    hider.classList.add('showerror');
+}
+
+function showerror() {
+    hider.innerHTML = '<div><b>An Error Occured!</b><p id="error-msg-text"></p></div>';
+    hider.getElementById('error-msg-text').textContent = msg;
     hider.classList.add('showerror');
 }
 
@@ -43,7 +49,7 @@ function sortpages() {
         //var dbgChRm = [];
         for(var i = 0; i < chapterPages.length;) {
             if(isNaN(
-                hashproced.archive? parseFloat(chapterPages[i].name) : parseFloat(isolateFileName(chapterPages[i].name))
+                hashproced.type === 1? parseFloat(chapterPages[i].name) : parseFloat(isolateFileName(chapterPages[i].name))
             )) {
                 chapterPages.splice(i,1);
                 //dbgChRm.push(chapterPages.splice(i,1)[0]);
@@ -53,7 +59,7 @@ function sortpages() {
         }
 
         if(chapterPages.length === 0) {
-            showerror(errorMessages.noFilesWithNumber);
+            showerrorraw(errorMessages.noFilesWithNumber);
             progress.textContent = 'Error';
             throw 'No valid files found. Aborted.';
         }
@@ -81,7 +87,7 @@ function archiveloaded() {
     jszip.loadAsync(pageload.result)
         .catch(function(err){
             console.error(err);
-            showerror(errorMessages.archiveNoFiles);
+            showerrorraw(errorMessages.archiveNoFiles);
         })
         .then(function(zip){
             var zipf = zip.files;
@@ -146,7 +152,7 @@ function scanner() {
         //progress.textContent = (current + 1) + '/' + (chapterPagesLoaded || chapterPages.length);
         updatePageOSD();
         inited = true;
-        if(!hashproced.archive) {updateLoadingBar(100);}
+        if(hashproced.type !== 1) {updateLoadingBar(100);}
     }
 }
 function updateLoadingBar(wid) {
@@ -163,16 +169,22 @@ function updateLoadingBar(wid) {
 
 window.addEventListener('load', function(){
     //console.log('start');
-    if(hashproced.archive) {
-        //console.log('is archive');
-        pageload = sdcard.get(pathprefix + '/' + hashproced.target + '/' + hashproced.chapter + '.cbz');
-        pageload.onsuccess = archiveloaded;
-    } else {
-        //console.log('not archive');
-        pageload = sdcard.enumerate(pathprefix + '/' + hashproced.target + '/' + hashproced.chapter + '/');
-        pageload.onsuccess = scanner;
-        //eid('loadingosd').style.display = 'none';
+    switch(hashproced.type) {
+        case 0: //not archive. just files.
+            pageload = sdcard.enumerate(pathprefix + '/' + hashproced.target + '/' + hashproced.chapter + '/');
+            pageload.onsuccess = scanner;
+            //eid('loadingosd').style.display = 'none';
+            break;
+        case 1: //a folder.
+            jszip = new JSZip(); //jszip: only used for reading :( 
+            pageload = sdcard.get(pathprefix + '/' + hashproced.target + '/' + hashproced.chapter + '.cbz');
+            pageload.onsuccess = archiveloaded;
+            break;
+        case 2: //o n l i n e
+            break;
+
     }
+
     navigator.requestWakeLock('screen');
 
     if(

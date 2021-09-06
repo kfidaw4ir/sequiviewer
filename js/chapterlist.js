@@ -30,7 +30,7 @@ function keyhandle(k) {
                         name: bookinfo.title.textContent,
                         chapter: chci.path,
                         hidden: !eid('hiddenbadge').style.display,
-                        archive: chci.archive
+                        type: Number(chci.archive)
                     };
 
                     console.log(params);

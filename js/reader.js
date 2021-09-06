@@ -266,31 +266,38 @@ function pageSwitch(forward) {
     if(!inited) {return false;}
 
     
-
-    we = !!displayend.style.display;
+    var ess = !!displayend.style.display;
     displayend.style.display = null;
     displaycont.style.display = null;
 
     switch(typeof(forward)) {
         case 'boolean': 
-            var nextpage = current + forward;
             if(harddisk.getItem('pageTurnDirRight') === '1') {
                 forward = !forward;
             }
 
-            if(we) {return false;}
+            var nextpage = current + (-1 + (forward * 2));
+
+            console.log(nextpage);
 
             if(nextpage in chapterPages) {
-                if(!chapterPages[nextpage].blob && hashproced.archive) {
+                if(
+                    !forward && 
+                    !!ess
+                ) {
+                    return false;
+                } else if(!chapterPages[nextpage].blob && hashproced.type === 1 /* is archive */) {
                     toastmsg('Pages are still loading...');
                     return false;
                 }
-            } else if(nextpage === chapterPages.length) {
-                displayend.style.display = 'block';
-                displaycont.style.display = 'none';
+            } else {
+                if(nextpage === chapterPages.length) {
+                    displayend.style.display = 'block';
+                    displaycont.style.display = 'none';
+                }
                 return false;
             }
-            if(!forward) {nextpage -= 1;}
+            //if(!forward) {nextpage -= 1;}
 
             break;
         case 'number': 
@@ -312,10 +319,9 @@ function pageSwitch(forward) {
     displayurl = newurl;
     display.remove();
     display = document.createElement('img');
+    display.id = 'page';
     display.src = 'img/blank.png';
-    setTimeout(function(){
-        display.src = displayurl;
-    },1);
+    display.src = displayurl;
     displaycont.appendChild(display);
 
     /* display.decode().then(function(){
@@ -349,7 +355,7 @@ function updatePageOSD() {
     showLoadingDetails = harddisk.getItem('showLoadingDetails') === '1';
     if(
         (chapterPages.length !== chapterPagesLoaded) && 
-        hashproced.archive
+        hashproced.type === 1
     ) {
         var clp = Math.floor((chapterPagesLoaded/chapterPages.length)*100);
         updateLoadingBar(clp);
@@ -359,7 +365,7 @@ function updatePageOSD() {
     } else if(
         showLoadingDetails &&
         !pageload.done &&
-        !hashproced.archive
+        hashproced.type !== 1
     ) {
         progress.innerHTML = 'Loading...' + progressRightSideWrapper(`Found ${chapterPages.length} files`);
         return;
