@@ -18,25 +18,7 @@ window.addEventListener('keydown',function(k) {
         case "Enter":
             settingsOK();
             break;
-
-/*             case "7":
-                if(hiddenprog === 0) {hiddenprog++;}
-                break;
-            case "1":
-                if(hiddenprog === 1) {hiddenprog++;}
-                break;
-            case "8":
-                if(hiddenprog === 2) {
-                    if(harddisk.getItem('hidden') === 'true') {
-                        harddisk.setItem('hidden','false');
-                        window.alert('Hide hidden by default.');
-                    } else {
-                        harddisk.setItem('hidden','true');
-                        window.alert('Show hidden by default.');
-                    }
-                }
-                break;
- */    }
+    }
 })
 
 function navMove(down) {
@@ -89,16 +71,7 @@ window.addEventListener('load',function(){
             getCurrentSettingLabel(stels[i]).textContent = stVal;
         }
     }
-
-    /* ecn('settings-value')[0].textContent = snbool2onoff(harddisk.getItem('snapOn')); //page snap on p turn
-    ecn('settings-value')[1].textContent = direction2string(); //snap direction
-    ecn('settings-value')[2].textContent = ; //page turn dir    ecn('settings-value')[0].textContent = snbool2onoff(harddisk.getItem('snapOn')); //page snap on p turn
-    ecn('settings-value')[3].textContent = snbool2onoff(harddisk.getItem('volKeyPageTurn')); //page snap on p turn
-    ecn('settings-value')[4].textContent = snbool2onoff(harddisk.getItem('labelArchive')); 
-    ecn('settings-value')[5].textContent = snbool2onoff(harddisk.getItem('labelFolder')); 
-    ecn('settings-value')[6].textContent = snbool2onoff(harddisk.getItem('showClock'));  */
-
-})
+});
 
 function settingsOK() {
     var cv = document.activeElement.dataset.setting;
@@ -115,53 +88,22 @@ function settingsOK() {
 
         case 'snapTo':
             if(harddisk.getItem('defaultSnapX') === '0') { //if x is false
-            //    console.log('dsx = 0');
                 harddisk.setItem('defaultSnapX','1');
             } else {
-                // console.log('dsx = 1');
                 harddisk.setItem('defaultSnapX','0');
     
                 if(harddisk.getItem('defaultSnapY') === '0') { //if y is false
-                    //console.log('dsy = 1');
                     harddisk.setItem('defaultSnapY','1');
                 } else {
-                    //console.log('dsy = 0');
                     harddisk.setItem('defaultSnapY','0');
                 }    
             }
-        
-            //console.log(harddisk.getItem('defaultSnapX') + harddisk.getItem('defaultSnapY'));
         
             getCurrentSettingLabel().textContent = direction2string();
         
             break;
     }
 }
-
-/* function settingsOK() {
-    var csdisp = ; //current setting display
-    switch(cur) {
-    case 0: //view tutorial
-        window.location = 'tutorial.html';
-        break;
-    case 1: //change snap activation
-        togglesetting('snapOn');
-        break;
-    case 2:
-
-    case 3: //change page direction
-        togglesetting('pageTurnDirRight','Right','Left'); break;
-    case 4: //volume keys for page turning
-        togglesetting('volKeyPageTurn'); break;
-    case 5: //label archives...
-        togglesetting('labelArchive'); break;
-    case 6: //..fdsfsdf
-        togglesetting('labelFolder'); break;
-    case 6: //clock
-        togglesetting('showClock'); break;
-
-}
-} */
 
 function togglesetting(sname,tr,fa) {
     if(harddisk.getItem(sname) === '1') {

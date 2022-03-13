@@ -9,149 +9,6 @@ window.addEventListener('keydown',function(k){
     }
     navbarUpdate();
 });
-    //console.log(k.key);
-
-function mainK(k) {
-    var movementAct = false;
-    switch(k.key) {
-        case "VolumeUp":
-            if(harddisk.getItem('volKeyPageTurn') === '0') {break;}
-        case "ArrowRight":
-            k.preventDefault();
-            pageSwitch(true);
-            break;
-        case "VolumeDown":
-            if(harddisk.getItem('volKeyPageTurn') === '0') {break;}
-        case "ArrowLeft":
-            k.preventDefault();
-            pageSwitch(false);
-            break;
-        case "Backspace":
-            k.preventDefault();
-            if(document.fullscreenElement) {
-                document.exitFullscreen();
-                break;
-            }
-            history.back();
-            //window.location = 'chapterlist.html#' + hashproced.target;
-            break;
-        case "SoftLeft":
-            if(!document.fullscreenElement) {
-                document.body.requestFullscreen();
-            } else {
-                document.exitFullscreen();
-            }
-            break;
-        case "SoftRight": jumpToShow(true); break;
-        case "Enter":
-            //hider.style.display = 'none';
-            hider.classList.add('hidden')
-            break;
-        
-        case '0':
-            osdToggle();
-            break;
-        
-        //image transforms below//
-        //reset
-        case '5': 
-            viewimgscale = 100;
-            viewimgtranslatex = 50;
-            viewimgtranslatey = 50;
-            displayScale();
-            movementAct = true;
-            break;
-
-        //zoom
-        case 'ArrowDown':
-            k.preventDefault();
-            displayScale(false);
-            movementAct = true;
-            break;
-        case 'ArrowUp':
-            k.preventDefault();
-            displayScale(true);
-            movementAct = true;
-            break;
-
-        //movex
-        case '4':
-            directionalsHeld.push('4'); 
-            movementHoldLoop();
-            break;
-            /* if(viewimgtranslatex - 10 > 0) {
-                viewimgtranslatex -= 10;
-            } else {
-                viewimgtranslatex = 0;
-            }
-
-            //movementAct = true;
-            break; */
-        case '6':
-            directionalsHeld.push('6'); 
-            movementHoldLoop();
-            break;
-            /* if(viewimgtranslatex + 10 < 100) {
-                viewimgtranslatex += 10;
-            } else {
-                viewimgtranslatex = 100;
-            }
-            //movementAct = true;
-            break; */
-        
-        //movey
-        case '2':
-            directionalsHeld.push('2'); 
-            movementHoldLoop();
-            break;
-            /* if(viewimgtranslatey - 10 > 0) {
-                viewimgtranslatey -= 10;
-            } else {
-                viewimgtranslatey = 0;
-            }
-            //movementAct = true;
-            break; */
-        case '8':
-            directionalsHeld.push('8'); 
-            movementHoldLoop();
-            break;
-            /* if(viewimgtranslatey + 10 < 100) {
-                viewimgtranslatey += 10;
-            } else {
-                viewimgtranslatey = 100;
-            }
-            //movementAct = true;
-            break; */
-
-        //shoot the user to the corner of the page.
-        case '9': //bottom right
-            cornerPos(true,true);
-            movementAct = true;
-            break;
-            
-        case '7': //bottom left
-            cornerPos(false,true);
-            movementAct = true;
-            break;
-
-        case '3': //top right
-            cornerPos(true,false);
-            movementAct = true;
-            break;
-
-        case '1': //top left
-            cornerPos(false,false);
-            movementAct = true;
-            break;
-
-        }
-        movementUpdate();
-        if(movementAct) {
-            updatePososd();
-            pososdShow();
-        }
-        //displaycont.style.transform = 'scale(' + viewimgscale + ') translate(' + viewimgtranslatex + '%, ' + viewimgtranslatey + '%)';
-}
 
 window.addEventListener('keyup',function(k){
     switch(currentPage) {
@@ -159,21 +16,6 @@ window.addEventListener('keyup',function(k){
     }
 });
 
-function mainKup(k) {
-    //make a temporary function for removing a dir
-    var dhrm = (num) => {
-        directionalsHeld.splice(directionalsHeld.indexOf(num),1);
-    };
-    switch(k.key) {
-        //movex
-        case '4': dhrm('4'); break;
-        case '6': dhrm('6'); break;
-        //movey
-        case '2': dhrm('2'); break;
-        case '8': dhrm('8'); break;
-            
-    }
-}
 
 var movementHoldLoopActive = false;
 function movementHoldLoop(fromto) {
@@ -208,48 +50,10 @@ function movementHoldLoop(fromto) {
             }
         }
 
-/*         switch(directionalsHeld[directionalsHeld.length - 1]) {
-            //movex
-            case '4':
-	            if(viewimgtranslatex - trxamnt > 0) {
-	            	viewimgtranslatex -= trxamnt;
-	            } else {
-	            	viewimgtranslatex = 0;
-	            }
-            
-	            break;
-            case '6':
-            	if(viewimgtranslatex + trxamnt < 100) {
-            		viewimgtranslatex += trxamnt;
-            	} else {
-            		viewimgtranslatex = 100;
-            	}
-            	break;
-            
-            //movey
-            case '2':
-            	if(viewimgtranslatey - trxamnt > 0) {
-            		viewimgtranslatey -= trxamnt;
-            	} else {
-            		viewimgtranslatey = 0;
-            	}
-            	break;
-            case '8':
-            	if(viewimgtranslatey + trxamnt < 100) {
-            		viewimgtranslatey += trxamnt;
-            	} else {
-            		viewimgtranslatey = 100;
-            	}
-            	break;
-
-
-        }
- */
         movementUpdate();
         updatePososd();
         pososdShow();
         setTimeout(function(){movementHoldLoop(true)},1000/10);
-        //requestAnimationFrame(movementHoldLoop);
     }
 }
 
@@ -297,7 +101,6 @@ function pageSwitch(forward) {
                 }
                 return false;
             }
-            //if(!forward) {nextpage -= 1;}
 
             break;
         case 'number': 
@@ -324,10 +127,6 @@ function pageSwitch(forward) {
     display.src = displayurl;
     displaycont.appendChild(display);
 
-    /* display.decode().then(function(){
-        console.log('decoded');
-        eid('loadingosd').style.display = 'none';
-    }); */
     if(harddisk.getItem('snapOn') === '1') {
         cornerPos(
             harddisk.getItem('defaultSnapX') === '1',
@@ -369,12 +168,7 @@ function updatePageOSD() {
     ) {
         progress.innerHTML = 'Loading...' + progressRightSideWrapper(`Found ${chapterPages.length} files`);
         return;
-        //progressRightSide = `Found ${chapterPages.length} files`;
     }
-
-    /* if(progressRightSide !== '') {
-        progressRightSide = '<br><span style="font-size:small">' + progressRightSide + '</span>';
-    } */
     progress.innerHTML = (current + 1) + '/' + chapterPages.length + progressRightSideWrapper(progressRightSide);
 }
 
@@ -481,32 +275,16 @@ function pososdHide() {
 
 function osdToggle() {
     if(harddisk.getItem('osdShowMode') === '1') {
-        if(!eid('pososd').style.display) /* {
-            toastmsg('OSD Showing',{time:750});
-        } else  */{
+        if(!eid('pososd').style.display) {
             pososdHide();
             zoomosdHide();
-            /* toastmsg('OSD Hidden',{time:750}); */
             return;
         }
         updatePososd();
         pososdShow();
         displayScale();
     }
-    //navbarRightUpdate();
 }
-
-/* function navbarRightUpdate() {
-    var at = 'Show';
-    if(
-        harddisk.getItem('osdShowMode') === '1' &&
-        !eid('pososd').style.display
-    ) {
-        at = 'Hide';
-    }
-    navbar.right.textContent = at + ' OSD';
-}
- */
 
 function navbarUpdate() {
     var l = r = c = '';

@@ -34,7 +34,6 @@ header.textContent = '#' + parseFloat(hashproced.chapter) + ' - ' + hashproced.n
 
 function showerrorraw(msg) {
     hider.innerHTML = '<div><b>An Error Occured!</b><p>' + msg + '</div>';
-    //hider.style.display = null;
     hider.classList.add('showerror');
 }
 
@@ -46,41 +45,28 @@ function showerror() {
 
 function sortpages() {
     //sort now
-        //var dbgChRm = [];
-        for(var i = 0; i < chapterPages.length;) {
-            if(isNaN(
-                hashproced.type === 1? parseFloat(chapterPages[i].name) : parseFloat(isolateFileName(chapterPages[i].name))
-            )) {
-                chapterPages.splice(i,1);
-                //dbgChRm.push(chapterPages.splice(i,1)[0]);
-            } else {
-                i++;
-            }
+    for(var i = 0; i < chapterPages.length;) {
+        if(isNaN(
+            hashproced.type === 1? parseFloat(chapterPages[i].name) : parseFloat(isolateFileName(chapterPages[i].name))
+        )) {
+            chapterPages.splice(i,1);
+        } else {
+            i++;
         }
+    }
 
-        if(chapterPages.length === 0) {
-            showerrorraw(errorMessages.noFilesWithNumber);
-            progress.textContent = 'Error';
-            throw 'No valid files found. Aborted.';
-        }
-        //console.log(dbgChRm);
-        chapterPages.sort((a,b)=> {
-            var
-            first = isolateFileName(a.name),
-            second = isolateFileName(b.name);
+    if(chapterPages.length === 0) {
+        showerrorraw(errorMessages.noFilesWithNumber);
+        progress.textContent = 'Error';
+        throw 'No valid files found. Aborted.';
+    }
+    chapterPages.sort((a,b)=> {
+        var
+        first = isolateFileName(a.name),
+        second = isolateFileName(b.name);
 
-            return parseFloat(first) - parseFloat(second); 
-
-
-            /* if(!isNaN(parseFloat(first)) && !isNaN(parseFloat(second))) {
-                return parseFloat(first) - parseFloat(second); 
-            } else {
-                //fallback to alphabet sort
-                if(a < b) {return -1}
-                if(a > b) {return 1}
-                return 0;
-            } */
-        });
+        return parseFloat(first) - parseFloat(second); 
+    });
 }
 
 function archiveloaded() {
@@ -91,7 +77,6 @@ function archiveloaded() {
         })
         .then(function(zip){
             var zipf = zip.files;
-            //var zipfk = Object.keys(zipf);
             for(var fil of Object.keys(zipf)) {
                 chapterPages.push({
                     name: fil,
@@ -99,10 +84,7 @@ function archiveloaded() {
                 });
             }
 
-            
-            //progress.textContent = 'Loading...';
             sortpages();
-            
             archivefilep();
 
         });
@@ -110,11 +92,9 @@ function archiveloaded() {
 
 function archivefilep() {
     jszip.files[chapterPages[chapterPagesLoaded].name].async('blob').then(function(bl){
-        //console.log('read');
         chapterPages[chapterPagesLoaded].blob = bl;
 
         chapterPagesLoaded++;
-        //console.log(chapterPagesLoaded === chapterPages.length);
 
         if(chapterPagesLoaded === 1) { //if we loaded the first one
             pageload = {}; //reset it for next function
@@ -123,14 +103,11 @@ function archivefilep() {
         }
 
         updatePageOSD();
-        //progress.textContent = (current + 1) + '/' + chapterPagesLoaded;
-        //eid('loadingosd').innerHTML = 'Loading pages:<br>' + chapterPagesLoaded + ' of ' + chapterPages.length;
 
         if(chapterPagesLoaded === chapterPages.length) { 
             //finalize
             jszip = undefined;
             updateLoadingBar(100);
-            //eid('loadingosd').style.display = 'none';
         } else {
             archivefilep(); //it's like continue() for devicestorage enumerate objects.
             // it is not recursive; it runs in a then()
@@ -149,7 +126,6 @@ function scanner() {
         sortpages();
 
         display.src = URL.createObjectURL(chapterPages[0].blob || chapterPages[0]);
-        //progress.textContent = (current + 1) + '/' + (chapterPagesLoaded || chapterPages.length);
         updatePageOSD();
         inited = true;
         if(hashproced.type !== 1) {updateLoadingBar(100);}
@@ -166,14 +142,12 @@ function updateLoadingBar(wid) {
     }
 }
 
-
 window.addEventListener('load', function(){
     //console.log('start');
     switch(hashproced.type) {
         case 0: //not archive. just files.
             pageload = sdcard.enumerate(pathprefix + '/' + hashproced.target + '/' + hashproced.chapter + '/');
             pageload.onsuccess = scanner;
-            //eid('loadingosd').style.display = 'none';
             break;
         case 1: //a folder.
             jszip = new JSZip(); //jszip: only used for reading :( 
