@@ -1,4 +1,10 @@
 # sequiviewer
+## ATTN: this project has been abandoned.
+this project was created when i was worser (worser than i am now) at programming. i dont want to maintain this code anymore so i will abandon this project.
+
+i may or may not create a new version. uhh yea that's it.
+
+## description
 
 a **seq**uential **i**mage **viewer** for kaios.
 
