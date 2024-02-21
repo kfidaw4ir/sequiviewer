@@ -1,5 +1,29 @@
 # sequiviewer
-## ATTN: this project has been abandoned.
+
+## TODO
+
+- [ ]  update jszip
+- [ ]  fix the sorting algo
+- [ ]  rewrite the reader 
+- [ ]  implement library cache 
+- [ ]  border cropping
+- [ ]  adjust the preload amount
+- [ ]  add a kill switch? 
+- [ ]  adjust the zooming step *(increase it to 20%)*
+- [ ]  zoom into double page spreads 
+- [ ]  make some use of the remaining button (call, 0, *, #, middle)
+   
+    - [ ]  ~~screenshot~~
+    - [ ]  exit the app/turn off the screen
+    - [ ]  save the last state of the reader
+
+---
+
+
+
+## ATTN: this project ~~has been abandoned.~~ i'll make improvements to the app
+
+
 this project was created when i was worser (worser than i am now) at programming. i dont want to maintain this code anymore so i will abandon this project.
 
 i may or may not create a new version. uhh yea that's it.
